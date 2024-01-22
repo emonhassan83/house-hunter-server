@@ -16,11 +16,6 @@ const createUser = asyncHandler(async (req, res) => {
       data: newUser,
     });
   } else {
-    //user already exists
-    // res.json({
-    //     success: false,
-    //     message: "User already exists",
-    // })
     throw new Error("User already exists");
   }
 });
@@ -33,22 +28,6 @@ const loginUser = asyncHandler(async (req, res) => {
     const findUser = await User.findOne({ email });
 
     if (findUser && (await findUser.isPasswordMatched(password))) {
-        // res.json(findUser)
-      //apply cookies
-    //   const refreshToken = await generateRefreshToken(findUser?._id);
-    //   const updateUser = await User.findByIdAndUpdate(
-    //     findUser?.id,
-    //     {
-    //       refreshToken: refreshToken,
-    //     },
-    //     {
-    //       new: true,
-    //     }
-    //   );
-    //   res.cookie("refreshToken", refreshToken, {
-    //     httpOnly: true,
-    //     maxAge: 72 * 60 * 60 * 1000,
-    //   });
       res.json({
         success: true,
         message: "User login successfully",
@@ -88,9 +67,24 @@ const getAllUser = asyncHandler(async (req, res) => {
     }
   });
 
+  //* Delete a single user
+const deleteAUser = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    try {
+       await User.findByIdAndDelete(id);
+      res.json({
+        success: true,
+        message: "Users deleted successfully!",
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  });
+
 module.exports = {
     createUser,
     loginUser,
     getAllUser,
-    getAUser
+    getAUser,
+    deleteAUser
 }
