@@ -5,11 +5,13 @@ const {
   deleteHouse,
   updateHouse,
   getAHouseByOwner,
+  getAllOwnerHouses,
 } = require("../controller/ownerHouseController");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const router = express.Router();
 
 router.post("/add-house",authMiddleware, addHouse);
+router.get("/all-owner-houses", getAllOwnerHouses);
 router.get("/houses", authMiddleware, getHousesByOwner);
 router.get("/house/:id", authMiddleware, getAHouseByOwner);
 router.delete("/delete-house/:houseId",authMiddleware, deleteHouse);
