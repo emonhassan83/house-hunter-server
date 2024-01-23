@@ -5,6 +5,10 @@ const asyncHandler = require("express-async-handler");
 const authMiddleware = asyncHandler(async (req, res, next) => {
   let token = req.headers.authorization;
 
+  if (!token) {
+    throw new Error('You are not authorized!');
+  }
+
   try {
     if (token) {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);

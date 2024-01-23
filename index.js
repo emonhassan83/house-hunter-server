@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 const authRouter = require('./routes/authRoutes');
+const ownerHouseRouter = require('./routes/onwerHouseRoutes');
 const bodyParser = require('body-parser');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //* ROUTES
 app.use('/api/user', authRouter);
+app.use('/api/house-owner', ownerHouseRouter);
 
 app.use(notFound);
 app.use(errorHandler);

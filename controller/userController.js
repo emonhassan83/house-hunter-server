@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 //register a user
 const createUser = asyncHandler(async (req, res) => {
   const {email} = req.body;
-  console.log(email);
+
   const findUser = await User.findOne({ email: email });
   if (!findUser) {
     //create a new user
