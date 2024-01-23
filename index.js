@@ -22,12 +22,13 @@ app.use('/api/user', authRouter);
 app.use('/api/house-owner', ownerHouseRouter);
 app.use('/api/house-renter', houseRenterRouter);
 
-app.use(notFound);
-app.use(errorHandler);
-
 app.use('/', (req, res)=> {
     res.send("Hello from House Hunter server side!");
 })
+
+app.use(notFound);
+app.use(errorHandler);
+
 
 app.listen(PORT, () => {
     console.log(`House Hunter server listening on port ${PORT}`);
