@@ -15,8 +15,12 @@ const { notFound, errorHandler } = require('./middleware/errorHandler');
 dbConnect();
 
 //* middleware
-
-app.use(cors());
+const corsOptions = {
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
+  };
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,7 +36,6 @@ app.use('/', (req, res)=> {
 
 app.use(notFound);
 app.use(errorHandler);
-
 
 app.listen(PORT, () => {
     console.log(`House Hunter server listening on port ${PORT}`);
