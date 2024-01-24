@@ -41,8 +41,7 @@ const houseSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
       required: true,
-      // Assuming Bangladeshi phone numbers
-      match: /^\+8801[1-9]\d{8}$/,
+     match: /^01\d{9}$/,
     },
     description: {
       type: String,

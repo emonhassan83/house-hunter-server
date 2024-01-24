@@ -2,6 +2,7 @@ const express = require('express');
 const dbConnect = require('./config/dbConnect');
 // const dbConnect = require('./config/dbConnect');
 const app = express();
+const cors = require('cors');
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 const authRouter = require('./routes/authRoutes');
@@ -14,6 +15,9 @@ const { notFound, errorHandler } = require('./middleware/errorHandler');
 dbConnect();
 
 //* middleware
+
+app.use(cors());
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

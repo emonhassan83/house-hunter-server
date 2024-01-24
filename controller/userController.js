@@ -27,11 +27,17 @@ const loginUser = asyncHandler(async (req, res) => {
     //? check if user already exists or not
     const findUser = await User.findOne({ email });
 
+    const tokenData = {
+      user: findUser.name,
+      email: findUser.email,
+      role: findUser.role
+    }
+
     if (findUser && (await findUser.isPasswordMatched(password))) {
       res.json({
         success: true,
         message: "User login successfully",
-        token: generateToken(findUser?._id),
+        token: generateToken(tokenData),
       });
     } else {
       throw new Error("Invalid Credentials");

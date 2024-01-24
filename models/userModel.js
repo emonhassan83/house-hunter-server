@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    photoURL: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
